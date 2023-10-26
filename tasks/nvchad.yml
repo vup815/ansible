@@ -1,0 +1,12 @@
+- name: remove nvim
+  command: rm -rf ~/.config/nvim; rm -rf ~/.local/share/nvim/; rm -rf ~/.local/state/nvim
+
+- name: Install NvChad
+  ansible.builtin.git:
+    repo: 'https://github.com/NvChad/NvChad'
+    dest: "~/.config/nvim"
+    depth: 1
+
+
+- name: Copy Custom Folder to 
+  command: cp -r ~/dotfiles/custom ~/.config/nvim/lua/
