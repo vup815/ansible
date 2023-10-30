@@ -1,0 +1,22 @@
+- name: Install zsh
+  command: curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh 
+
+- name: Clone powerlevel9k
+  ansible.builtin.git:
+    repo: "{{MY_REPO}}/powerlevel9k.git"
+    dest: "{{ZSH_CUSTOM}}/themes/powerlevel9k"
+
+- name: Clone zsh-you-should-use
+  ansible.builtin.git:
+    repo: "{{MY_REPO}}/zsh-you-should-use.git"
+    dest: "{{ZSH_CUSTOM}}/plugins/zsh-you-should-use"
+
+- name: Clone zsh-autosuggestions
+  ansible.builtin.git:
+    repo: "{{MY_REPO}}/zsh-autosuggestions.git"
+    dest: "{{ZSH_CUSTOM}}/plugins/zsh-autosuggestions"
+
+- name: Clone zsh-syntax-highlighting
+  ansible.builtin.git:
+    repo: "{{MY_REPO}}/zsh-syntax-highlighting.git"
+    dest: "{{ZSH_CUSTOM}}/plugins/zsh-syntax-highlighting"

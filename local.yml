@@ -1,3 +1,10 @@
 - hosts: localhost
+  vars:
+    ZSH_CUSTOM: "~/.oh-my-zsh/custom"
+    MY_REPO: "https://github.com/vup815"
+    email: samuel.tseng@jkos.com
+    username: Samuel.Tseng
   tasks:
+    - include: tasks/zsh.yml
     - include: tasks/neovim.yml
+    - include: tasks/git.yml
