@@ -11,4 +11,4 @@
     depth: 1
 
 - name: Copy Custom Folder
-  command: cp -r ~/dotfiles/custom ~/.config/nvim/lua/
+  command: cp -r ./custom ~/.config/nvim/lua/

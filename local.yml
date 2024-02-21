@@ -5,6 +5,8 @@
     email: samuel.tseng@jkos.com
     username: Samuel.Tseng
   tasks:
+    - include: tasks/brew.yml
     - include: tasks/zsh.yml
     - include: tasks/neovim.yml
+    - include: tasks/symlink.yml
     - include: tasks/git.yml

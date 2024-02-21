@@ -1,0 +1,11 @@
+- name: Check if Homebrew is installed
+  command: "brew --version"
+  register: homebrew_check
+  ignore_errors: yes  # Ignore errors if Homebrew is not installed
+
+- name: Install Homebrew if necessary
+  command: curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  when: homebrew_check.rc != 0
+
+- name: Batch install with brew bundle
+  command: brew bundle --file=~/ansible/Brewfile

@@ -1,0 +1,8 @@
+- name: clone my dotfiles repo
+  ansible.builtin.git:
+    repo: "{{MY_REPO}}/dotfiles.git"
+    dest: "~/dotfiles"
+    depth: 1
+
+- name: create symlink
+  command: cd ~/dotfiles && stow -t ~ .
