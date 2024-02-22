@@ -9,3 +9,4 @@
 
 - name: Batch install with brew bundle
   command: brew bundle --file=~/ansible/Brewfile
+  ignore_errors: yes  # Ignore errors if Homebrew is not installed

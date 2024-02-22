@@ -1,8 +1,8 @@
 - name: Remove nvim folder
-  command: rm -rf ~/.config/nvim rm -rf ~/.local/share/nvim/ rm -rf ~/.local/state/nvim
+  shell: rm -rf ~/.config/nvim rm -rf ~/.local/share/nvim/ rm -rf ~/.local/state/nvim
 
 - name: ReInstall nvim
-  command: brew reinstall neovim
+  shell: brew reinstall neovim
 
 - name: Clone NvChad
   ansible.builtin.git:
@@ -11,4 +11,4 @@
     depth: 1
 
 - name: Copy Custom Folder
-  command: cp -r ./custom ~/.config/nvim/lua/
+  shell: cp -r ./custom ~/.config/nvim/lua/

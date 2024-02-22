@@ -5,4 +5,4 @@
     depth: 1
 
 - name: create symlink
-  command: cd ~/dotfiles && stow -t ~ .
+  shell: cd {{ lookup('env', 'HOME')}}/dotfiles && stow -D -t ~ . && stow -t ~ .
