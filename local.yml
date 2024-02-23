@@ -1,12 +1,16 @@
 - hosts: localhost
   vars:
+    source_key: "./.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
     ZSH_CUSTOM: "~/.oh-my-zsh/custom"
     MY_REPO: "https://github.com/vup815"
     email: samuel.tseng@jkos.com
     username: Samuel.Tseng
+
   tasks:
-    - include: tasks/brew.yml
-    - include: tasks/zsh.yml
-    - include: tasks/neovim.yml
-    - include: tasks/symlink.yml
-    - include: tasks/git.yml
+    - import_tasks: tasks/brew.yml
+    - import_tasks: tasks/zsh.yml
+    - import_tasks: tasks/neovim.yml
+    - import_tasks: tasks/symlink.yml
+    - import_tasks: tasks/git.yml
+    - import_tasks: tasks/ssh.yml
