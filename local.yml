@@ -4,8 +4,8 @@
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
     ZSH_CUSTOM: "~/.oh-my-zsh/custom"
     MY_REPO: "https://github.com/vup815"
-    email: samuel.tseng@jkos.com
-    username: Samuel.Tseng
+    email: vup815@gmail.com
+    username: samuel.tseng
 
   tasks:
     - import_tasks: tasks/brew.yml
