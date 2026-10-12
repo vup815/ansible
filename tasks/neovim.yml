@@ -1,10 +1,11 @@
 - name: Remove existing nvim data and config folders
-  shell: rm -rf ~/.config/nvim; rm -rf ~/.local/share/nvim/; rm -rf ~/.local/state/nvim; rm -rf ~/.cache/nvim
+  ansible.builtin.shell: rm -rf ~/.config/nvim; rm -rf ~/.local/share/nvim/; rm -rf ~/.local/state/nvim; rm -rf ~/.cache/nvim
   args:
     executable: /bin/zsh
+  changed_when: true
 
 - name: Ensure neovim is installed
-  homebrew:
+  community.general.homebrew:
     name: neovim
     state: present
 
@@ -13,8 +14,8 @@
   # to already exist in ~/.ssh (ssh.yml runs last in local.yml, so on a fresh
   # machine install the key first or run the ssh task before this one).
   ansible.builtin.git:
-    repo: 'git@github.com:vup815/nvim-config.git'
+    repo: "git@github.com:vup815/nvim-config.git"
     dest: "~/.config/nvim"
     version: main
-    update: yes
-    force: yes
+    update: true
+    force: true

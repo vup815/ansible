@@ -1,26 +1,34 @@
 - name: Install zsh
-  command: curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh 
+  # Fetches the oh-my-zsh installer; pipe to sh manually on first run.
+  ansible.builtin.command: curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  changed_when: true
+  failed_when: false
+  # noqa: command-instead-of-module
 
 - name: Clone powerlevel9k
   ansible.builtin.git:
     repo: "https://github.com/bhilburn/powerlevel9k.git"
-    dest: "{{ZSH_CUSTOM}}/themes/powerlevel9k"
+    dest: "{{ zsh_custom }}/themes/powerlevel9k"
+    version: master
     depth: 1
 
 - name: Clone zsh-you-should-use
   ansible.builtin.git:
     repo: "https://github.com/MichaelAquilina/zsh-you-should-use.git"
-    dest: "{{ZSH_CUSTOM}}/plugins/zsh-you-should-use"
+    dest: "{{ zsh_custom }}/plugins/zsh-you-should-use"
+    version: master
     depth: 1
 
 - name: Clone zsh-autosuggestions
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "{{ZSH_CUSTOM}}/plugins/zsh-autosuggestions"
+    dest: "{{ zsh_custom }}/plugins/zsh-autosuggestions"
+    version: master
     depth: 1
 
 - name: Clone zsh-syntax-highlighting
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "{{ZSH_CUSTOM}}/plugins/zsh-syntax-highlighting"
+    dest: "{{ zsh_custom }}/plugins/zsh-syntax-highlighting"
+    version: master
     depth: 1

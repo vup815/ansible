@@ -1,16 +1,23 @@
-- hosts: localhost
+- name: Configure macOS workstation
+  hosts: localhost
   vars:
-    source_key: "./.ssh/id_rsa"
+    source_key: "{{ playbook_dir }}/.ssh/id_rsa"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
-    ZSH_CUSTOM: "~/.oh-my-zsh/custom"
-    MY_REPO: "https://github.com/vup815"
+    zsh_custom: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom"
+    my_repo: "https://github.com/vup815"
     email: vup815@gmail.com
     username: samuel.tseng
 
   tasks:
-    - import_tasks: tasks/brew.yml
-    - import_tasks: tasks/zsh.yml
-    - import_tasks: tasks/neovim.yml
-    - import_tasks: tasks/symlink.yml
-    - import_tasks: tasks/git.yml
-    - import_tasks: tasks/ssh.yml
+    - name: Install Homebrew packages
+      ansible.builtin.import_tasks: tasks/brew.yml
+    - name: Configure zsh and oh-my-zsh
+      ansible.builtin.import_tasks: tasks/zsh.yml
+    - name: Install and configure neovim
+      ansible.builtin.import_tasks: tasks/neovim.yml
+    - name: Link dotfiles into home directory
+      ansible.builtin.import_tasks: tasks/symlink.yml
+    - name: Configure git identity
+      ansible.builtin.import_tasks: tasks/git.yml
+    - name: Install ssh keys
+      ansible.builtin.import_tasks: tasks/ssh.yml

@@ -1,12 +1,17 @@
 - name: Check if Homebrew is installed
-  command: "brew --version"
+  ansible.builtin.command: brew --version
   register: homebrew_check
-  ignore_errors: yes  # Ignore errors if Homebrew is not installed
+  changed_when: false
+  failed_when: false
 
 - name: Install Homebrew if necessary
-  command: curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  # No module installs Homebrew itself; the official installer is a curl pipe.
+  ansible.builtin.command: curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
   when: homebrew_check.rc != 0
+  changed_when: true
+  # noqa: command-instead-of-module
 
 - name: Batch install with brew bundle
-  command: brew bundle --file=~/ansible/Brewfile
-  ignore_errors: yes  # Ignore errors if Homebrew is not installed
+  ansible.builtin.command: brew bundle --file={{ playbook_dir }}/Brewfile
+  changed_when: true
+  failed_when: false

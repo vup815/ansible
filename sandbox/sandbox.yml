@@ -1,0 +1,21 @@
+# Linux sandbox test playbook.
+# Imports the REAL task files from the mounted repo (/ansible/tasks/...)
+# so what is tested is what is committed. Only portable tasks are included:
+# brew.yml is macOS-only (homebrew/casks) and the oh-my-zsh installer line in
+# zsh.yml is covered only as far as its fetch command goes.
+# The neovim git URL is read live from tasks/neovim.yml (see test-nvim-url.sh)
+# so the SSH clone test always tracks the real file.
+- hosts: localhost
+  connection: local
+  vars:
+    source_key: "/sandbox-keys/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    zsh_custom: "{{ lookup('env', 'HOME') }}/.oh-my-zsh/custom"
+    my_repo: "https://github.com/vup815"
+    email: vup815@gmail.com
+    username: samuel.tseng
+  tasks:
+    - import_tasks: /ansible/tasks/zsh.yml
+    - import_tasks: /ansible/tasks/git.yml
+    - import_tasks: /ansible/tasks/symlink.yml
+    - import_tasks: /ansible/tasks/ssh.yml
