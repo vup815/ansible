@@ -1,14 +1,16 @@
-- name: Remove nvim folder
-  shell: rm -rf ~/.config/nvim rm -rf ~/.local/share/nvim/ rm -rf ~/.local/state/nvim
+- name: Remove existing nvim data and config folders
+  shell: rm -rf ~/.config/nvim; rm -rf ~/.local/share/nvim/; rm -rf ~/.local/state/nvim; rm -rf ~/.cache/nvim
+  args:
+    executable: /bin/zsh
 
-- name: ReInstall nvim
-  shell: brew reinstall neovim
+- name: Ensure neovim is installed
+  homebrew:
+    name: neovim
+    state: present
 
-- name: Clone NvChad
+- name: Clone my LazyVim-based nvim-config (includes personal config)
   ansible.builtin.git:
-    repo: 'https://github.com/NvChad/NvChad'
+    repo: 'git@github.com:vup815/nvim-config.git'
     dest: "~/.config/nvim"
-    depth: 1
-
-- name: Copy Custom Folder
-  shell: cp -r ./custom ~/.config/nvim/lua/
+    version: main
+    update: yes
