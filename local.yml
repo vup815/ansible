@@ -3,7 +3,7 @@
     source_key: "./.ssh/id_rsa"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
     ZSH_CUSTOM: "~/.oh-my-zsh/custom"
-    MY_REPO: "git@github.com:vup815"
+    MY_REPO: "https://github.com/vup815"
     email: vup815@gmail.com
     username: samuel.tseng
 

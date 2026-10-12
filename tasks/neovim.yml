@@ -9,8 +9,12 @@
     state: present
 
 - name: Clone my LazyVim-based nvim-config (includes personal config)
+  # NOTE: private repo, requires a GitHub SSH key with access to vup815/nvim-config
+  # to already exist in ~/.ssh (ssh.yml runs last in local.yml, so on a fresh
+  # machine install the key first or run the ssh task before this one).
   ansible.builtin.git:
     repo: 'git@github.com:vup815/nvim-config.git'
     dest: "~/.config/nvim"
     version: main
     update: yes
+    force: yes
